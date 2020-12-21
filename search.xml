@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Cesium之Entity中的填充</title>
+      <link href="2020/12/21/Cesium%E4%B8%AD%E7%9A%84Entity2/"/>
+      <url>2020/12/21/Cesium%E4%B8%AD%E7%9A%84Entity2/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var viewer &#x3D; new Cesium.Viewer(&#39;cesiumContainer&#39;);</span><br><span class="line"></span><br><span class="line">var entity &#x3D; viewer.entities.add(&#123;</span><br><span class="line">position : Cesium.Cartesian3.fromDegrees(-103.0, 40.0),</span><br><span class="line">ellipse : &#123;</span><br><span class="line">semiMinorAxis : 250000.0,</span><br><span class="line">semiMajorAxis : 400000.0,</span><br><span class="line">material : Cesium.Color.BLUE.withAlpha(0.5)</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var ellipse &#x3D; entity.ellipse;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;填充图片</span><br><span class="line">ellipse.material &#x3D; &#39;.&#x2F;Source&#x2F;14.jpg&#39;;</span><br></pre></td></tr></table></figure><img src="/2020/12/21/Cesium%E4%B8%AD%E7%9A%84Entity2/1.png" class><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;填充棋盘</span><br><span class="line">ellipse.material &#x3D; new Cesium.CheckerboardMaterialProperty(&#123;</span><br><span class="line">evencolor : Cesium.Color.WHITE,</span><br><span class="line">oddcolor : Cesium.Color.BLACK,</span><br><span class="line">repeat : new Cesium.Cartesian2(4, 4)&#x2F;&#x2F;二维里面重复4*4</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><img src="/2020/12/21/Cesium%E4%B8%AD%E7%9A%84Entity2/2.png" class><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;填充条纹</span><br><span class="line">ellipse.material &#x3D; new Cesium.StripeMaterialProperty(&#123;</span><br><span class="line">evenColor : Cesium.Color.WHITE,</span><br><span class="line">oddColor : Cesium.color.BLACK,</span><br><span class="line">repeat : 32,&#x2F;&#x2F;一维里面重复32个</span><br><span class="line">&#x2F;&#x2F;offset : 3,</span><br><span class="line">&#x2F;&#x2F;orientation : VERTICAL</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><img src="/2020/12/21/Cesium%E4%B8%AD%E7%9A%84Entity2/3.png" class><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;填充网格</span><br><span class="line">ellipse.material &#x3D; new Cesium.GridMaterialProperty(&#123;</span><br><span class="line">color : Cesium.Color.YELLOW,</span><br><span class="line">cellAlpha : 0.2,</span><br><span class="line">lineCount : new Cesium.Cartesian2(8, 8),</span><br><span class="line">lineThickness : new Cesium.Cartesian2(2.0, 2.0)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><img src="/2020/12/21/Cesium%E4%B8%AD%E7%9A%84Entity2/4.png" class><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">viewer.zoomTo(viewer.entities);</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Cesium </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Cesium中的Entities</title>
       <link href="2020/12/17/Cesium%E4%B8%AD%E7%9A%84Entities/"/>
       <url>2020/12/17/Cesium%E4%B8%AD%E7%9A%84Entities/</url>
