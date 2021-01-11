@@ -16,6 +16,8 @@
             
             <tag> Cesium </tag>
             
+            <tag> Entity </tag>
+            
         </tags>
       
     </entry>
@@ -23,7 +25,7 @@
     
     
     <entry>
-      <title>Cesium中的Entities</title>
+      <title>Cesium之Entities1</title>
       <link href="2020/12/17/Cesium%E4%B8%AD%E7%9A%84Entities/"/>
       <url>2020/12/17/Cesium%E4%B8%AD%E7%9A%84Entities/</url>
       
