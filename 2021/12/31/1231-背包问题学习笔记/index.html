@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>动态规划之01背包问题（一） | 三多之路</title><meta name="keywords" content="LeetCode,背包问题,动态规划"><meta name="author" content="侯三多"><meta name="copyright" content="侯三多"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="1.01背包dp[N] [V+1]（第一讲）有 N 件物品和一个容量为 V 的背包。第 i 件物品的体积是 v[i]，价值是 w[i]。求解将哪些物品装入背包可使价值总和最大，求出最大总价值。 123输入: N &#x3D; 3, V &#x3D; 5, v &#x3D; [4,2,3], w &#x3D; [4,2,3]输出: 5解释: 不选第一件物品，选择第二件和第三件物品，可使价值最大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划之01背包问题（一）">
+<meta property="og:url" content="http://example.com/2021/12/31/1231-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="三多之路">
+<meta property="og:description" content="1.01背包dp[N] [V+1]（第一讲）有 N 件物品和一个容量为 V 的背包。第 i 件物品的体积是 v[i]，价值是 w[i]。求解将哪些物品装入背包可使价值总和最大，求出最大总价值。 123输入: N &#x3D; 3, V &#x3D; 5, v &#x3D; [4,2,3], w &#x3D; [4,2,3]输出: 5解释: 不选第一件物品，选择第二件和第三件物品，可使价值最大。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-12-31T02:40:21.000Z">
+<meta property="article:modified_time" content="2021-12-31T06:27:49.197Z">
+<meta property="article:author" content="侯三多">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="背包问题">
+<meta property="article:tag" content="动态规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2021/12/31/1231-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-4938871430544881',
+  enable_page_level_ads: 'true'
+});</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"Author: 侯三多","link":"Link: ","source":"Source: 三多之路","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2021-12-31 14:27:49'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">12</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三多之路</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">动态规划之01背包问题（一）</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-12-31T02:40:21.000Z" title="Created 2021-12-31 10:40:21">2021-12-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-12-31T06:27:49.197Z" title="Updated 2021-12-31 14:27:49">2021-12-31</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>4min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="1-01背包dp-N-V-1-（第一讲）"><a href="#1-01背包dp-N-V-1-（第一讲）" class="headerlink" title="1.01背包dp[N] [V+1]（第一讲）"></a>1.01背包dp[N] [V+1]（第一讲）</h1><p>有 N 件物品和一个容量为 V 的背包。第 i 件物品的体积是 v[i]，价值是 w[i]。求解将哪些物品装入背包可使价值总和最大，求出最大总价值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: N &#x3D; 3, V &#x3D; 5, v &#x3D; [4,2,3], w &#x3D; [4,2,3]</span><br><span class="line">输出: 5</span><br><span class="line">解释: 不选第一件物品，选择第二件和第三件物品，可使价值最大。</span><br></pre></td></tr></table></figure>
+
+<p>考虑上面的这个输入，我们用表格来思考一下，我们考虑放入前i件物品获得的最大价值是多少</p>
+<table>
+<thead>
+<tr>
+<th>i\V</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>4</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>定义状态</p>
+</blockquote>
+<p>前n个物品的在提及V处的最大价值可以通过前n-1个物品推到出来，因此我们可以把问题拆解为第i个问题和第i-1个问题，定义dp[i] [j] 为前i个物品放入到体积为j的背包中可以获得的最大价值。</p>
+<blockquote>
+<p>状态方程</p>
+</blockquote>
+<p>对于每个<strong>物品i（体积v[i]价值w[i]）</strong>我们都有两种选择：<strong>放入背包或不放入背包</strong>，是否放入取决于两个条件，第一：背包的容量是否足够；第二：放入之后的总价值与不放入到总价值哪个更大。</p>
+<ul>
+<li><strong>空间不足的时候</strong>，第i个物品放不进去，那么最大价值就是前i-1个物品的价值：<ul>
+<li>dp[i] [j] = dp[i-1] [j]</li>
+</ul>
+</li>
+<li><strong>空间充足的时候</strong>，能够放入第i个物品，但是我们必须要判断是选择放还是不放，<strong>判断的依据就是不放进去和放进去的价值大小</strong>，并选择两者中较大者：<ul>
+<li>不放为：dp[i-1] [j]</li>
+<li>放进去为：dp[i-1] [j - v[i]] + w[i] （因为要放进去，所以留给前i-1个物品的大小只有j-v[i]了，然后再加上w[i]）</li>
+<li>最终dp[i] [j] = max(dp[i-1] [j], dp[i-1] [j - v[i]] + w[i])</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>边界条件</p>
+</blockquote>
+<p>当只放入第一件物品的时候，只需要判断当前的空间j是否能够放入v[0]即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findPaths</span>(<span class="params">self, N, V, v, w</span>) -&gt; int:</span></span><br><span class="line">        dp = [[<span class="number">0</span>] * (V + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(V + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> j &gt;= v[<span class="number">0</span>]:</span><br><span class="line">                dp[<span class="number">0</span>][j] = w[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, N):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(V + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> j &lt; v[i]:</span><br><span class="line">                    <span class="comment"># 空间不足</span></span><br><span class="line">                    dp[i][j] = dp[i<span class="number">-1</span>][j]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 空间充足</span></span><br><span class="line">                    dp[i][j] = max(dp[i<span class="number">-1</span>][j], dp[i<span class="number">-1</span>][j-v[i]] + w[i])</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>][V]</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-01背包优化为二维dp-2-V-1"><a href="#2-01背包优化为二维dp-2-V-1" class="headerlink" title="2.01背包优化为二维dp[2] [V+1]"></a>2.01背包优化为二维dp[2] [V+1]</h1><p>通过上面的表格我们可以发现，当前行的结果只与上一行的结果有关，因此我们可以用一个二维数组来保存结果，这样可以更加节省空间。只需要判断当前行是奇数行还是偶数行即可，这里我们用的是i &amp; 1 这个操作，也可以用i%2这个来做判断。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findPaths</span>(<span class="params">N, V, v, w</span>):</span></span><br><span class="line">    dp = [[<span class="number">0</span>] * (V + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">if</span> j &gt;= v[<span class="number">0</span>]:</span><br><span class="line">            dp[<span class="number">0</span>][j] = w[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, N):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(V + <span class="number">1</span>):</span><br><span class="line">            <span class="comment"># 空间不足</span></span><br><span class="line">            <span class="keyword">if</span> j &lt; v[i]:</span><br><span class="line">                dp[i &amp; <span class="number">1</span>][j] = dp[(i<span class="number">-1</span>) &amp; <span class="number">1</span>][j]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[i &amp; <span class="number">1</span>][j] = max(dp[(i<span class="number">-1</span>) &amp; <span class="number">1</span>][j], dp[(i<span class="number">-1</span>) &amp; <span class="number">1</span>][j-v[i]] + w[i])</span><br><span class="line">    print(dp)</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>][V]</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-01背包优化一维dp-V-1"><a href="#3-01背包优化一维dp-V-1" class="headerlink" title="3.01背包优化一维dp[V+1]"></a>3.01背包优化一维dp[V+1]</h1><p>根据状态转移方程 $dp[i] [j] = max(dp[i-1] [j], dp[i-1] [j - v[i]] + w[i])$ 我们可以看出，dp[i] [j]只与dp[i-1] [j] 、dp[i-1] [j - v[i]] 这两个元素相关，即<strong>第i行的数值只与第i-1行的</strong> **<u>第j个格子以及第j-v[i]个格子相关</u>**。</p>
+<p>对于第i行，我们此时遍历的顺序是从0到V，只需要改为从V到0就可以不用到这两个元素，这样就可以从二维降低到一维。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findPaths</span>(<span class="params">N, V, v, w</span>):</span></span><br><span class="line">    dp = [<span class="number">0</span>] * (V + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(V, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> j &gt;= v[i]:</span><br><span class="line">                dp[j] = max(dp[j], dp[j-v[i]] + w[i])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    print(dp)</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>此为本人学习笔记，整理方便回顾，会参考到部分博主，尽可能会一一列明，如有遗漏请见谅。</p>
+<p>参考资料：</p>
+<p>宫水三叶的相关题解以及LeetCode相关题解</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45594025/article/details/106112195">https://blog.csdn.net/weixin_45594025/article/details/106112195</a></p>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LeetCode/">LeetCode</a><a class="post-meta__tags" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">背包问题</a><a class="post-meta__tags" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/12/29/1229%E4%B8%80%E6%96%87%E8%AF%A6%E8%A7%A3%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info"></div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/12/24/1225-二叉树的三种遍历方式/" title="一文详解二叉树的三种遍历方式（前序、中序、后序）"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-24</div><div class="title">一文详解二叉树的三种遍历方式（前序、中序、后序）</div></div></a></div><div><a href="/2021/12/27/1227-一文详解二叉树的层序遍历/" title="一文详解二叉树的层序遍历"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-27</div><div class="title">一文详解二叉树的层序遍历</div></div></a></div><div><a href="/2021/12/29/1229-一文详解回溯算法/" title="一文详解回溯算法"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-29</div><div class="title">一文详解回溯算法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By 侯三多</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: '6kxIlys6O892N2aKzQ1855Ad-MdYXbMMI',
+      appKey: 'TYEDtfslCH4QT0ODMlHGHaGc',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="//code.tidio.co/jtw2gf0ig0ylkc0so38yv6a0syags4zs.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script></div></body></html>
