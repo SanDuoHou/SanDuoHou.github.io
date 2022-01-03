@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>动态规划之完全背包问题 | 三多之路</title><meta name="keywords" content="LeetCode,背包问题,动态规划"><meta name="author" content="侯三多"><meta name="copyright" content="侯三多"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="1.题目描述 回顾一下01背包  有N种物品和一个容量为V的背包，每种物品只有一种。第i件物品的体积是v[i] ，价值是w[i]。  完全背包  有N种物品和一个容量为V的背包，每种物品都有无限多种。第i件物品的体积是v[i] ，价值是w[i]。  两者的区别  完全背包**是在01背包的基础上增加了一个条件：每种物品可以取无限多次（在背包容量满足的条件下）**。 123输入: N &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划之完全背包问题">
+<meta property="og:url" content="http://example.com/2022/01/02/220102%20CompletePack/index.html">
+<meta property="og:site_name" content="三多之路">
+<meta property="og:description" content="1.题目描述 回顾一下01背包  有N种物品和一个容量为V的背包，每种物品只有一种。第i件物品的体积是v[i] ，价值是w[i]。  完全背包  有N种物品和一个容量为V的背包，每种物品都有无限多种。第i件物品的体积是v[i] ，价值是w[i]。  两者的区别  完全背包**是在01背包的基础上增加了一个条件：每种物品可以取无限多次（在背包容量满足的条件下）**。 123输入: N &#x3D;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-01-02T12:23:29.000Z">
+<meta property="article:modified_time" content="2022-01-03T06:46:44.611Z">
+<meta property="article:author" content="侯三多">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="背包问题">
+<meta property="article:tag" content="动态规划">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2022/01/02/220102%20CompletePack/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-4938871430544881',
+  enable_page_level_ads: 'true'
+});</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"Author: 侯三多","link":"Link: ","source":"Source: 三多之路","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2022-01-03 14:46:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">13</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三多之路</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">动态规划之完全背包问题</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-01-02T12:23:29.000Z" title="Created 2022-01-02 20:23:29">2022-01-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-01-03T06:46:44.611Z" title="Updated 2022-01-03 14:46:44">2022-01-03</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>10min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h1><blockquote>
+<p>回顾一下01背包</p>
+</blockquote>
+<p>有N种物品和一个容量为V的背包，每种物品只有一种。第i件物品的体积是v[i] ，价值是w[i]。</p>
+<blockquote>
+<p>完全背包</p>
+</blockquote>
+<p>有N种物品和一个容量为V的背包，每种物品都有无限多种。第i件物品的体积是v[i] ，价值是w[i]。</p>
+<blockquote>
+<p>两者的区别</p>
+</blockquote>
+<p><strong><u>完全背包</u>**是在</strong><u>01背包</u><strong>的基础上增加了一个条件：</strong>每种物品可以取无限多次（在背包容量满足的条件下）**。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: N &#x3D; 4, V &#x3D; 10, v &#x3D; [1,2,3,4], w &#x3D; [1,4,5,10]</span><br><span class="line">输出: 24</span><br><span class="line">解释: 选一件物品2，再选两件物品 4，可使价值最大。</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法一：定义数组dp-N-V-1-、N维空间"><a href="#解法一：定义数组dp-N-V-1-、N维空间" class="headerlink" title="解法一：定义数组dp[N] [V+1]、N维空间"></a>解法一：定义数组dp[N] [V+1]、N维空间</h2><blockquote>
+<p>定义状态</p>
+</blockquote>
+<p>前n个物品的在体积V处的最大价值可以通过前n-1个物品推到出来，因此我们可以把问题拆解为第i个问题和第i-1个问题。</p>
+<p><strong>dp[i] [j]定义 为前i个物品放入到体积为j的背包中可以获得的最大价值。</strong></p>
+<blockquote>
+<p>状态方程</p>
+</blockquote>
+<p>由于每个物品i可以被选择多次，因此对于dp[i] [j]来说，它的可能取值为：</p>
+<ul>
+<li><p>选择0件物品i的价值，即dp[i-1] [j]</p>
+</li>
+<li><p>选择1件物品i的价值，即dp[i-1] [j - 1 * v[i]] + 1 * w[i]</p>
+</li>
+<li><p>选择2件物品i的价值，即dp[i-1] [j - 2 * v[i]] + 2 * w[i]</p>
+<p>……</p>
+</li>
+<li><p>选择k件物品i的价值，即dp[i-1] [j - k * v[i]] + k * w[i]</p>
+</li>
+</ul>
+<p>状态转移方程为所有可能取值中的最大值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] &#x3D; max(dp[i-1][j], dp[i-1][j - k * v[i]] + k * w[i]), 0 &lt; k * v[j] &lt;&#x3D; j</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>边界</p>
+</blockquote>
+<p>先考虑dp[0] [j]的情况，对于容量为j的背包，把v[0]放进去，最大的价值是多少。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">completepack</span>(<span class="params">N, V, v, w</span>):</span></span><br><span class="line">    dp = [[<span class="number">0</span>] * (V + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(V + <span class="number">1</span>):</span><br><span class="line">        dp[<span class="number">0</span>][j] = j // v[<span class="number">0</span>] * w[<span class="number">0</span>]</span><br><span class="line">    print(dp)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, N):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(V+<span class="number">1</span>):</span><br><span class="line">            dp[i][j] = max(dp[i<span class="number">-1</span>][j], dp[i][j]) <span class="comment"># 先考虑选择0件物品dp[i-1][j]</span></span><br><span class="line">            k = <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> j &gt;= v[i] * k:</span><br><span class="line">                dp[i][j] = max(dp[i][j], dp[i - <span class="number">1</span>][j - k * v[i]] + k * w[i])</span><br><span class="line">                k += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：定义数组dp-2-V-1-、二维空间采用滚动数组"><a href="#解法二：定义数组dp-2-V-1-、二维空间采用滚动数组" class="headerlink" title="解法二：定义数组dp[2] [V+1]、二维空间采用滚动数组"></a>解法二：定义数组dp[2] [V+1]、二维空间采用滚动数组</h2><p>根据状态方程我们可以知道，dp[i] [j]的结果只与dp[i-1]相关，因此我们可以参考01背包的方法来优化空间，只需要用一个二维的数组即可解决问题。dp[0]和dp[1]轮流交替使用，例如i=1时，dp[1]根据dp[0]的结果获得；i=2时，dp[2]可以转换为dp[0]， 然后再根据dp[1]的结果获得；</p>
+<p>需要做的就是判断当前i是奇数还是偶数即可，一种方法是用i % 2 == 0?来判断；一种方法是让i&amp;1进行与运算判断；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">completepack</span>(<span class="params">N, V, v, w</span>):</span></span><br><span class="line">    dp = [[<span class="number">0</span>] * (V + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">2</span>)]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(V + <span class="number">1</span>):</span><br><span class="line">        dp[<span class="number">0</span>][j] = j // v[<span class="number">0</span>] * w[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, N):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(V + <span class="number">1</span>):</span><br><span class="line">            dp[i &amp; <span class="number">1</span>][j] = max(dp[(i - <span class="number">1</span>) &amp; <span class="number">1</span>][j], dp[i &amp; <span class="number">1</span>][j])</span><br><span class="line">            k = <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> j &gt;= v[i] * k:</span><br><span class="line">                dp[i &amp; <span class="number">1</span>][j] = max(dp[i &amp; <span class="number">1</span>][j], dp[(i - <span class="number">1</span>) &amp; <span class="number">1</span>][j - k * v[i]] + k * w[i])</span><br><span class="line">                k += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：定义数组-V-1-、一维空间"><a href="#解法二：定义数组-V-1-、一维空间" class="headerlink" title="解法二：定义数组[V+1]、一维空间"></a>解法二：定义数组[V+1]、一维空间</h2><blockquote>
+<p>01背包：优化为一维空间</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] &#x3D; max(dp[i-1][j], dp[i-1][j - v[i]] + w[i])</span><br></pre></td></tr></table></figure>
+
+<p>dp[i] [j]的结果只与dp[i-1] [j],  dp[i-1] [j - v[i]]这两个元素有关，因此我们可以把从0到V遍历求解改为从V到0遍历求解，这样就可以每次先把上一次的dp[j-v[i]]保存下来，然后当前再遍历的时候比较一下结果是否发生改变，取最大值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[j] &#x3D; max(dp[j], dp[j-v[i]] + w[i])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>完全背包：优化为一维度空间</p>
+</blockquote>
+<p>对于完全背包可以参照01背包进行类似推导，详情参考下图，（图源：宫水三叶的刷题笔记）</p>
+<img src="/2022/01/02/220102%20CompletePack/1.png" class>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 原始状态转移方程</span><br><span class="line">dp[i][j] &#x3D; max(dp[i-1][j], dp[i-1][j - k * v[i]] + k * w[i]), 0 &lt; k * v[j] &lt;&#x3D; j</span><br><span class="line"># 第一次优化</span><br><span class="line">dp[i][j] &#x3D; max(dp[i-1][j], dp[i-1][j - v[i]] + w[i])</span><br><span class="line"># 一维优化</span><br><span class="line">dp[j] &#x3D; max(dp[j], dp[j-v[i]] + w[i])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">completepack</span>(<span class="params">N, V, v, w</span>):</span></span><br><span class="line">    dp = [<span class="number">0</span>] * (V + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(V + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> j - v[i] &gt;= <span class="number">0</span>:</span><br><span class="line">                dp[j] = max(dp[j], dp[j-v[i]] + w[i])</span><br><span class="line">        print(dp)</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-279-完全平方数"><a href="#2-279-完全平方数" class="headerlink" title="2.279. 完全平方数"></a>2.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/">279. 完全平方数</a></h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, …）使得它们的和等于 n。你需要让组成和的完全平方数的个数最少。</p>
+<p>给你一个整数 n ，返回和为 n 的完全平方数的 最少数量 。</p>
+<p>完全平方数 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，1、4、9 和 16 都是完全平方数，而 3 和 11 不是。 </p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 12</span><br><span class="line">输出：3 </span><br><span class="line">解释：12 &#x3D; 4 + 4 + 4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 13</span><br><span class="line">输出：2</span><br><span class="line">解释：13 &#x3D; 4 + 9</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路（以示例1为例）"><a href="#思路（以示例1为例）" class="headerlink" title="思路（以示例1为例）"></a>思路（以示例1为例）</h2><p>这是一个典型的完全背包问题，根据题意我们可以把问题转换重新描述一下：</p>
+<p><strong><u>有三种物品N=3，体积为V=12，物品体积v=[1, 4, 9]，由于是求最小可能的组合数量，因此w=[1,1,1]，每个物品选择一次价值为1。</u></strong></p>
+<p><strong>定义数组</strong>：dp = [100000] * (n + 1)，这里是求最小的组合数量，所以dp的初始值设置大一点（也可以设置为无穷大），<strong>dp[j]含义</strong>代表当体积为j时组合的数量为dp[j]。</p>
+<p><strong>定义状态方程</strong>：dp[j] = min(dp[j], dp[j-v[i]] + w[i])，因为w[i] = 1,所以这里可以直接写为1，也可以写w[i]，由于是求最小值，所以用min而不是max。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numSquares</span>(<span class="params">self, n: int</span>) -&gt; int:</span></span><br><span class="line">        dp = [n + <span class="number">1</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        j = <span class="number">1</span></span><br><span class="line">        <span class="comment"># 由于v需要我们自己生成，所以用循环判断平方即可</span></span><br><span class="line">        <span class="keyword">while</span> j * j &lt;= n:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> i &gt;= j * j:</span><br><span class="line">                    dp[i] = min(dp[i], dp[i-j*j] + <span class="number">1</span>)</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+
+<p>也可以用下面这种解法遍历，两种遍历的结果一致：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numSquares</span>(<span class="params">self, n: int</span>) -&gt; int:</span></span><br><span class="line">        dp = [n + <span class="number">1</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">            j = <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> j * j &lt;= i:</span><br><span class="line">                dp[i] = min(dp[i], dp[i - j * j] + <span class="number">1</span>)</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-322-零钱兑换"><a href="#3-322-零钱兑换" class="headerlink" title="3.322. 零钱兑换"></a>3.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/">322. 零钱兑换</a></h1><h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。</p>
+<p>计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回 -1 。</p>
+<p>你可以认为每种硬币的数量是无限的。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1, 2, 5], amount &#x3D; 11</span><br><span class="line">输出：3 </span><br><span class="line">解释：11 &#x3D; 5 + 5 + 1</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [2], amount &#x3D; 3</span><br><span class="line">输出：-1</span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<p>示例 4：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 1</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p>示例 5：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 2</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这个是比较典型的完全背包问题，但是需要注意的是，因为最终并不一定能够是的coins中的钱可以成功兑换为amount，例如coins = [2], amount = 3，所以我们需要加入一个value数组，其中value[j]=j的时候说明可以coins中的钱可以兑换为总金额为j的钱。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">coinChange</span>(<span class="params">self, coins: List[int], amount: int</span>) -&gt; int:</span></span><br><span class="line">        n = len(coins)</span><br><span class="line">        dp = [amount + <span class="number">1</span>] * (amount + <span class="number">1</span>)</span><br><span class="line">        value = [<span class="number">0</span>] * (amount + <span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(amount + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> j &gt;= coins[i] <span class="keyword">and</span> value[j-coins[i]] + coins[i] == j:</span><br><span class="line">                    dp[j] = min(dp[j], dp[j-coins[i]] + <span class="number">1</span>)</span><br><span class="line">                    value[j] = j</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>] <span class="keyword">if</span> value[<span class="number">-1</span>] == amount <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="优化时空复杂度"><a href="#优化时空复杂度" class="headerlink" title="优化时空复杂度"></a>优化时空复杂度</h2><p>为了能够降低时空复杂度，我们可以考虑不使用value数组，而是根据dp数组判断。</p>
+<p>dp数组初始值定义为无穷大∞，因为我们要求的是最小值，所以要定义为无穷大；同样如果题目求的是最大值，我们就可以直接定义为0。</p>
+<p>为了判断最终dp[amount]这个是否能够通过coins凑齐，只要判断dp[amount]的值是否发生变化，只要不再是float(‘inf’)就说明发生了变化，可以凑齐；否则就是不能凑齐。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">coinChange</span>(<span class="params">self, coins: List[int], amount: int</span>) -&gt; int:</span></span><br><span class="line">        n = len(coins)</span><br><span class="line">        dp = [float(<span class="string">&#x27;inf&#x27;</span>)] * (amount + <span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(coins[i], amount + <span class="number">1</span>):</span><br><span class="line">                dp[j] = min(dp[j], dp[j-coins[i]] + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>] <span class="keyword">if</span> dp[<span class="number">-1</span>] != float(<span class="string">&#x27;inf&#x27;</span>) <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-518-零钱兑换-II"><a href="#4-518-零钱兑换-II" class="headerlink" title="4.518. 零钱兑换 II"></a>4.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">518. 零钱兑换 II</a></h1><h2 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h2><p>给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。</p>
+<p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。</p>
+<p>假设每一种面额的硬币有无限个。 </p>
+<p>题目数据保证结果符合 32 位带符号整数。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：amount &#x3D; 5, coins &#x3D; [1, 2, 5]</span><br><span class="line">输出：4</span><br><span class="line">解释：有四种方式可以凑成总金额：</span><br><span class="line">5&#x3D;5</span><br><span class="line">5&#x3D;2+2+1</span><br><span class="line">5&#x3D;2+1+1+1</span><br><span class="line">5&#x3D;1+1+1+1+1</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：amount &#x3D; 3, coins &#x3D; [2]</span><br><span class="line">输出：0</span><br><span class="line">解释：只用面额 2 的硬币不能凑成总金额 3 。</span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：amount &#x3D; 10, coins &#x3D; [10] </span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>首先，定义dp[j] 代表能够构成金额j的方法有dp[j]种；</p>
+<p>接着，定义边界，dp[0] = 1构成金额0的有一种；</p>
+<p>接着，定义状态方程，dp[j] += dp[j-coins[i]] 这里我们不用管dp[j-coins[i]]是否为0，如果dp[j-coins[i]]不为0，说明可以在dp[j-coins[i]]的基础上加coins[i]构成dp[j]；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">change</span>(<span class="params">self, amount: int, coins: List[int]</span>) -&gt; int:</span></span><br><span class="line">        n = len(coins)</span><br><span class="line">        dp = [<span class="number">0</span>] * (amount + <span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(coins[i], amount + <span class="number">1</span>):</span><br><span class="line">                dp[j] += dp[j-coins[i]]</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486107&amp;idx=1&amp;sn=e5fa523008fc5588737b7ed801caf4c3&amp;chksm=fd9ca184caeb28926959c0987208a3932ed9c965267ed366b5b82a6fc16d42f1ff40c29db5f1&amp;token=990510480&amp;lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&amp;mid=2247486107&amp;idx=1&amp;sn=e5fa523008fc5588737b7ed801caf4c3&amp;chksm=fd9ca184caeb28926959c0987208a3932ed9c965267ed366b5b82a6fc16d42f1ff40c29db5f1&amp;token=990510480&amp;lang=zh_CN#rd</a></p>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LeetCode/">LeetCode</a><a class="post-meta__tags" href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">背包问题</a><a class="post-meta__tags" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/02/220102%E5%91%A8%E8%B5%9B/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">LeetCode周赛1月2日</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/12/31/211231-背包问题学习笔记/" title="动态规划之01背包问题"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-31</div><div class="title">动态规划之01背包问题</div></div></a></div><div><a href="/2022/01/02/220102周赛/" title="LeetCode周赛1月2日"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="title">LeetCode周赛1月2日</div></div></a></div><div><a href="/2021/12/24/211225-二叉树的三种遍历方式/" title="一文详解二叉树的三种遍历方式（前序、中序、后序）"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-24</div><div class="title">一文详解二叉树的三种遍历方式（前序、中序、后序）</div></div></a></div><div><a href="/2021/12/27/211227-一文详解二叉树的层序遍历/" title="一文详解二叉树的层序遍历"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-27</div><div class="title">一文详解二叉树的层序遍历</div></div></a></div><div><a href="/2021/12/29/211229-一文详解回溯算法/" title="一文详解回溯算法"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-29</div><div class="title">一文详解回溯算法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 侯三多</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: '6kxIlys6O892N2aKzQ1855Ad-MdYXbMMI',
+      appKey: 'TYEDtfslCH4QT0ODMlHGHaGc',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="//code.tidio.co/jtw2gf0ig0ylkc0so38yv6a0syags4zs.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script></div></body></html>
