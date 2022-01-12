@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>title | 三多之路</title><meta name="keywords" content="LeetCode,动态规划,二分查找"><meta name="author" content="侯三多"><meta name="copyright" content="侯三多"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="LeetCode刷题是很有规律的，我们在此称之为”子母题“，通过多个子题我们可以归纳总结出一个母题，通过一个母题我们可以演绎推理出多个子题。 今天的第一个题目就是母题，后面的几个题目就是子题，我们通过这个系列来加快刷题速度，快速掌握一个相关类型的题目。 1.300. 最长递增子序列题目给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。 子序列是由数组派生而来的序列，删除（或不删除）数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="title">
+<meta property="og:url" content="http://example.com/2022/01/12/220112%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/index.html">
+<meta property="og:site_name" content="三多之路">
+<meta property="og:description" content="LeetCode刷题是很有规律的，我们在此称之为”子母题“，通过多个子题我们可以归纳总结出一个母题，通过一个母题我们可以演绎推理出多个子题。 今天的第一个题目就是母题，后面的几个题目就是子题，我们通过这个系列来加快刷题速度，快速掌握一个相关类型的题目。 1.300. 最长递增子序列题目给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。 子序列是由数组派生而来的序列，删除（或不删除）数">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-01-12T10:27:06.000Z">
+<meta property="article:modified_time" content="2022-01-12T13:04:22.882Z">
+<meta property="article:author" content="侯三多">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="二分查找">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2022/01/12/220112%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-4938871430544881',
+  enable_page_level_ads: 'true'
+});</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"Author: 侯三多","link":"Link: ","source":"Source: 三多之路","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2022-01-12 21:04:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">17</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三多之路</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">title</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-01-12T10:27:06.000Z" title="Created 2022-01-12 18:27:06">2022-01-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-01-12T13:04:22.882Z" title="Updated 2022-01-12 21:04:22">2022-01-12</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>11min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p><strong>LeetCode刷题是很有规律的，我们在此称之为”子母题“，通过多个子题我们可以归纳总结出一个母题，通过一个母题我们可以演绎推理出多个子题。</strong></p>
+<p>今天的第一个题目就是母题，后面的几个题目就是子题，我们通过这个系列来加快刷题速度，快速掌握一个相关类型的题目。</p>
+<h1 id="1-300-最长递增子序列"><a href="#1-300-最长递增子序列" class="headerlink" title="1.300. 最长递增子序列"></a>1.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">300. 最长递增子序列</a></h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p>
+<p>子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [10,9,2,5,3,7,101,18]</span><br><span class="line">输出：4</span><br><span class="line">解释：最长递增子序列是 [2,3,7,101]，因此长度为 4 。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [0,1,0,3,2,3]</span><br><span class="line">输出：4</span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [7,7,7,7,7,7,7]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+
+<p>提示：</p>
+<p>1 &lt;= nums.length &lt;= 2500<br>-104 &lt;= nums[i] &lt;= 104</p>
+<h2 id="解法一：动态规划"><a href="#解法一：动态规划" class="headerlink" title="解法一：动态规划"></a>解法一：动态规划</h2><p>以nums=[10,9,2,5,3,7,101,18]为例，我们采用动态规划来解决这个问题，首先dp初始值全部为1，dp[i]代表以nums[i]为结尾的递增子序列长度为dp[i]。</p>
+<p>我们把nums[i]与前i-1个元素比较，如果<code>nums[i] &gt; nums[j]</code>就更新dp[i]，因此我们可以得到状态转移方程为：<code>dp[i] = max(dp[i], dp[j] + 1)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLIS</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        dp = [<span class="number">1</span>] * n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">                <span class="keyword">if</span> nums[i] &gt; nums[j]:</span><br><span class="line">                    dp[i] = max(dp[i], dp[j] + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> max(dp)</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>时间复杂度：O(n^2),空间复杂度：O(n)<br>$$</p>
+<h2 id="解法二：动态规划-二分查找"><a href="#解法二：动态规划-二分查找" class="headerlink" title="解法二：动态规划+二分查找"></a>解法二：动态规划+二分查找</h2><p>我们可以用一个数组tail，来动态保存一个递增子序列，tail在任意时刻都是保存当前最长子序列的结果，同时我们利用贪心思想，既让tail为递增子序列，有保证尽可能让后一个元素比前一个元素更接近。</p>
+<p>我们来动态模拟一下这个过程，更方便理解：</p>
+<p>当i=0时，由于tail初始为空，所以10进入tail，此时tail=[10]</p>
+<p>当i=1时，由于9&lt;10，所以我们让9替换10，此时tail=[9]；</p>
+<p>当i=2时，由于2&lt;9，所以我们让2替换9，此时tail=[2]</p>
+<p>当i=3时，由于5&gt;2，所以让5进入tail，此时tail=[2, 5]</p>
+<p>当i=4时，由于3&lt;5，而且3如果替换5的话依然可以保证tail递增，所以利用贪心思想，我们让3替换5，此时tail= [2, 3]；</p>
+<p>当i=5时，由于7&gt;3，所以让7进入tail，此时tail=[2, 3, 7]</p>
+<p>当i=6时，由于101&gt;7，所以让101进入tail，此时tail=[2, 3, 7, 101]</p>
+<p>当i=7时，由于18&lt;101，而且18如果替换101的话依然可以保证tail递增，所以利用贪心思想，我们让18替换101，此时tail=[2, 3, 7, 101]</p>
+<blockquote>
+<p>通过上面的模拟我们可以得到更新tail的两个原则：</p>
+</blockquote>
+<p>第一：时刻保证tail是递增的序列；第二：尽可能让后一个元素与前一个元素相接近，就是如果当前元素可以比原有的tail元素接近的话，就用当前元素替换原有的元素。</p>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nums[i]</td>
+<td>10</td>
+<td>9</td>
+<td>2</td>
+<td>5</td>
+<td>3</td>
+<td>7</td>
+<td>101</td>
+<td>18</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>[10]</td>
+<td>[9]</td>
+<td>[2]</td>
+<td>[2, 5]</td>
+<td>[2, 3]</td>
+<td>[2, 3, 7]</td>
+<td>[2, 3, 7, 101]</td>
+<td>[2, 3, 7, 18]</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLIS</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">        tail = []</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> tail <span class="keyword">or</span> num &gt; tail[<span class="number">-1</span>]:</span><br><span class="line">                <span class="comment"># tail为空或当前num大于tail的最后一个元素</span></span><br><span class="line">                tail.append(num)</span><br><span class="line">            l, r = <span class="number">0</span>, len(tail) - <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> l &lt; r:</span><br><span class="line">                <span class="comment"># 用当前的num更新tail数组，贪心思想来用num替换tail中的一个元素</span></span><br><span class="line">                mid = (l + r) // <span class="number">2</span></span><br><span class="line">                <span class="keyword">if</span> tail[mid] &lt; num:</span><br><span class="line">                    l = mid + <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    r = mid</span><br><span class="line">            tail[l] = num</span><br><span class="line">        <span class="keyword">return</span> len(tail)</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>时间复杂度：O(NlogN)，遍历数组使用了 O(N)，二分查找法使用了 O(logN)</p>
+<p>$$</p>
+<p>$$<br>空间复杂度：O(N)，开辟数组的长度至多和nums长度一样长<br>$$</p>
+<h1 id="2-334-递增的三元子序列"><a href="#2-334-递增的三元子序列" class="headerlink" title="2.334. 递增的三元子序列"></a>2.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/">334. 递增的三元子序列</a></h1><h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>给你一个整数数组 nums ，判断这个数组中是否存在长度为 3 的递增子序列。</p>
+<p>如果存在这样的三元组下标 (i, j, k) 且满足 i &lt; j &lt; k ，使得 nums[i] &lt; nums[j] &lt; nums[k] ，返回 true ；否则，返回 false 。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [1,2,3,4,5]</span><br><span class="line">输出：true</span><br><span class="line">解释：任何 i &lt; j &lt; k 的三元组都满足题意</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [5,4,3,2,1]</span><br><span class="line">输出：false</span><br><span class="line">解释：不存在满足题意的三元组</span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [2,1,5,0,4,6]</span><br><span class="line">输出：true</span><br><span class="line">解释：三元组 (3, 4, 5) 满足题意，因为 nums[3] &#x3D;&#x3D; 0 &lt; nums[4] &#x3D;&#x3D; 4 &lt; nums[5] &#x3D;&#x3D; 6</span><br></pre></td></tr></table></figure>
+
+
+<p>提示：</p>
+<p>1 &lt;= nums.length &lt;= 5 * 105<br>-231 &lt;= nums[i] &lt;= 231 - 1</p>
+<p>进阶：你能实现时间复杂度为 O(n) ，空间复杂度为 O(1) 的解决方案吗？</p>
+<h2 id="解法一：基于最长递增子序列的变形"><a href="#解法一：基于最长递增子序列的变形" class="headerlink" title="解法一：基于最长递增子序列的变形"></a>解法一：基于最长递增子序列的变形</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">increasingTriplet</span>(<span class="params">self, nums: List[int]</span>) -&gt; bool:</span></span><br><span class="line">        tail = []</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> tail <span class="keyword">or</span> num &gt; tail[<span class="number">-1</span>]:</span><br><span class="line">                <span class="comment"># tail为空或当前num大于tail的最后一个元素</span></span><br><span class="line">                tail.append(num)</span><br><span class="line">            l, r = <span class="number">0</span>, len(tail) - <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> l &lt; r:</span><br><span class="line">                <span class="comment"># 用当前的num更新tail数组，贪心思想来用num替换tail中的一个元素</span></span><br><span class="line">                mid = (l + r) // <span class="number">2</span></span><br><span class="line">                <span class="keyword">if</span> tail[mid] &lt; num:</span><br><span class="line">                    l = mid + <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    r = mid</span><br><span class="line">            tail[l] = num</span><br><span class="line">            <span class="keyword">if</span> len(tail) == <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度与空间复杂度同上</p>
+<h2 id="解法二：数学法（进阶）"><a href="#解法二：数学法（进阶）" class="headerlink" title="解法二：数学法（进阶）"></a>解法二：数学法（进阶）</h2><p>通过数学法，首先我们令a记录一个最小值，b记录次小值，如果在a，b之后存在一个元素比b大的话，就说明可以满足条件；<strong>a，b的初始值均为边界最大值；</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">increasingTriplet</span>(<span class="params">self, nums: List[int]</span>) -&gt; bool:</span></span><br><span class="line">        a = (<span class="number">2</span> ** <span class="number">31</span>)</span><br><span class="line">        b = (<span class="number">2</span> ** <span class="number">31</span>)</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> num &lt;= a:</span><br><span class="line">                a = num</span><br><span class="line">            <span class="keyword">elif</span> num &lt;= b:</span><br><span class="line">                b = num</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-354-俄罗斯套娃信封问题"><a href="#3-354-俄罗斯套娃信封问题" class="headerlink" title="3.354. 俄罗斯套娃信封问题"></a>3.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/russian-doll-envelopes/">354. 俄罗斯套娃信封问题</a></h1><h2 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h2><p>给你一个二维整数数组 envelopes ，其中 envelopes[i] = [wi, hi] ，表示第 i 个信封的宽度和高度。</p>
+<p>当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p>
+<p>请计算 最多能有多少个 信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p>
+<p>注意：不允许旋转信封。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：envelopes &#x3D; [[5,4],[6,4],[6,7],[2,3]]</span><br><span class="line">输出：3</span><br><span class="line">解释：最多信封的个数为 3, 组合为: [2,3] &#x3D;&gt; [5,4] &#x3D;&gt; [6,7]。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：envelopes &#x3D; [[1,1],[1,1],[1,1]]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+
+<p>提示：</p>
+<p>1 &lt;= envelopes.length &lt;= 5000<br>envelopes[i].length == 2<br>1 &lt;= wi, hi &lt;= 104</p>
+<h2 id="题目预处理"><a href="#题目预处理" class="headerlink" title="题目预处理"></a>题目预处理</h2><p>因为是二维数组，一般遇到这样的题目，都需要考虑先排序，要么是按照升序排序，要么是按照降序排序，或者是升序与降序结合的方式来排序。</p>
+<p>在这个题目中，我们采用两者结合的方法，先按照x[0]升序，在按照x[1]降序，降序的时候只要按照-x[1]升序即可；</p>
+<h2 id="解法一：动态规划-1"><a href="#解法一：动态规划-1" class="headerlink" title="解法一：动态规划"></a>解法一：动态规划</h2><p>由于已经按照上面的预处理进行排序，所以我们用动态规划的思想，就类似于<strong>最长递增子序列</strong>这个题目，第一维已经有序，所以只需要考虑第二维是否符合要求即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxEnvelopes</span>(<span class="params">self, envelopes: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        envelopes.sort(key=<span class="keyword">lambda</span> x: (x[<span class="number">0</span>], -x[<span class="number">1</span>]))</span><br><span class="line">        n = len(envelopes)</span><br><span class="line">        dp = [<span class="number">1</span>] * n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">                <span class="keyword">if</span> envelopes[j][<span class="number">1</span>] &lt; envelopes[i][<span class="number">1</span>]:</span><br><span class="line">                    dp[i] = max(dp[i], dp[j] + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> max(dp)</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：动态规划-二分查找-1"><a href="#解法二：动态规划-二分查找-1" class="headerlink" title="解法二：动态规划+二分查找"></a>解法二：动态规划+二分查找</h2><p>这个思路理解起来有些困难，</p>
+<p>我们envelops=[[2, 5], [2, 3], [5, 4], [5, 3], [6, 7], [6, 4]]</p>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>envelops[i]</td>
+<td>[2, 5]</td>
+<td>[2, 3]</td>
+<td>[5, 4]</td>
+<td>[5, 3]</td>
+<td>[6, 7]</td>
+<td>[6, 4]</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>5</td>
+<td>3</td>
+<td>3, 4</td>
+<td>3, 4</td>
+<td>3, 4, 7</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>对于第一维是2开始的有[2, 5]和  [2, 3]，我么首先把5加入tail，然后由于3&lt;5，所以把3加入tail。</p>
+<p>接下来对于第一维是5开始的有[5, 4]和[5, 3]，我们必须要找一个第二维比3大的才可以加入tail，最后找到了4；</p>
+<p>然后对于第一维是6开始的有[6, 7]和 [6, 4]，同上。</p>
+<p>根据上面的表格推理一遍就可以发现上面题目排序的方式的妙处在哪里。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxEnvelopes</span>(<span class="params">self, envelopes: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> envelopes:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        n = len(envelopes)</span><br><span class="line">        envelopes.sort(key=<span class="keyword">lambda</span> x: (x[<span class="number">0</span>], -x[<span class="number">1</span>]))</span><br><span class="line">        tail = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            num = envelopes[i][<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> tail <span class="keyword">or</span> num &gt; tail[<span class="number">-1</span>]:</span><br><span class="line">                tail.append(num)</span><br><span class="line">            <span class="keyword">elif</span> num &lt;= tail[<span class="number">-1</span>]:</span><br><span class="line">                l, r = <span class="number">0</span>, len(tail) - <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> l &lt; r:</span><br><span class="line">                    mid = (l + r) // <span class="number">2</span></span><br><span class="line">                    <span class="keyword">if</span> tail[mid] &lt; num:</span><br><span class="line">                        l = mid + <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        r = mid</span><br><span class="line">                tail[l] = num</span><br><span class="line">        <span class="keyword">return</span> len(tail)</span><br></pre></td></tr></table></figure>
+
+<p>针对上面的代码在二分查找这一部分进行优化，直接调用函数来实现，这样可以大大优化时间和代码量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxEnvelopes</span>(<span class="params">self, envelopes: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> envelopes:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        n = len(envelopes)</span><br><span class="line">        envelopes.sort(key=<span class="keyword">lambda</span> x: (x[<span class="number">0</span>], -x[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">        tail = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            num = envelopes[i][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> tail <span class="keyword">or</span> num &gt; tail[<span class="number">-1</span>]:</span><br><span class="line">                tail.append(num)</span><br><span class="line">            <span class="keyword">elif</span> num &lt;= tail[<span class="number">-1</span>]:</span><br><span class="line">                l = bisect.bisect_left(tail, num)</span><br><span class="line">                tail[l] = num</span><br><span class="line">        <span class="keyword">return</span> len(tail)</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-673-最长递增子序列的个数"><a href="#4-673-最长递增子序列的个数" class="headerlink" title="4.673. 最长递增子序列的个数"></a>4.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/">673. 最长递增子序列的个数</a></h1><h2 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h2><p>给定一个未排序的整数数组，找到最长递增子序列的个数。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,3,5,4,7]</span><br><span class="line">输出: 2</span><br><span class="line">解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,2,2,2,2]</span><br><span class="line">输出: 5</span><br><span class="line">解释: 最长递增子序列的长度是1，并且存在5个子序列的长度为1，因此输出5。</span><br></pre></td></tr></table></figure>
+
+<p>注意: 给定的数组长度不超过 2000 并且结果一定是32位有符号整数。</p>
+<h2 id="解法一：动态规划-2"><a href="#解法一：动态规划-2" class="headerlink" title="解法一：动态规划"></a>解法一：动态规划</h2><p>在第一个题目最长递增子序列的基础上，我们需要修改一下，dp的含义依然不变：以nums[i]结尾的最长子序列的长度；</p>
+<p>新增一个cnt数组，其含义是以nums[i]结尾的最长子序列的个数；</p>
+<p>有了长度数组dp和个数数组cnt，我们只需要每次遍历的时候比较一下max_len和max_ans就可以得到最终的结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findNumberOfLIS</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        dp = [<span class="number">1</span>] * n</span><br><span class="line">        cnt = [<span class="number">1</span>] * n</span><br><span class="line">        max_len, max_ans = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">                <span class="keyword">if</span> nums[i] &gt; nums[j]:</span><br><span class="line">                    <span class="keyword">if</span> dp[j] + <span class="number">1</span> &gt; dp[i]:</span><br><span class="line">                        dp[i] = dp[j] + <span class="number">1</span></span><br><span class="line">                        cnt[i] = cnt[j]</span><br><span class="line">                    <span class="keyword">elif</span> dp[j] + <span class="number">1</span> == dp[i]:</span><br><span class="line">                        cnt[i] += cnt[j]</span><br><span class="line">            <span class="keyword">if</span> dp[i] &gt; max_len:</span><br><span class="line">                max_len = dp[i]</span><br><span class="line">                max_ans = cnt[i]</span><br><span class="line">            <span class="keyword">elif</span> dp[i] == max_len:</span><br><span class="line">                max_ans += cnt[i]</span><br><span class="line">        <span class="keyword">return</span> max_ans</span><br></pre></td></tr></table></figure>
+
+<p>上面这个可以稍微优化一下，既然cnt是以nums[i]结尾的最长子序列的个数，只要我们在nums后面增加一个2 ** 31这个数，这样我们的最长子序列一定是以最后增加的这个数为结尾，这样就不需要设置max_len来标记最长长度。在代码量上会有很大的优化空间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findNumberOfLIS</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        nums = nums + [<span class="number">2</span> ** <span class="number">31</span>]</span><br><span class="line">        dp = [<span class="number">1</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        cnt = [<span class="number">1</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">                <span class="keyword">if</span> nums[i] &gt; nums[j]:</span><br><span class="line">                    <span class="keyword">if</span> dp[j] + <span class="number">1</span> &gt; dp[i]:</span><br><span class="line">                        dp[i] = dp[j] + <span class="number">1</span></span><br><span class="line">                        cnt[i] = cnt[j]</span><br><span class="line">                    <span class="keyword">elif</span> dp[j] + <span class="number">1</span> == dp[i]:</span><br><span class="line">                        cnt[i] += cnt[j]</span><br><span class="line">        <span class="keyword">return</span> cnt[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LeetCode/">LeetCode</a><a class="post-meta__tags" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a><a class="post-meta__tags" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/06/220107%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info"></div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/12/31/211231-背包问题学习笔记/" title="动态规划之01背包问题"><img class="cover" src="https://sanduohou.github.io/file/211231.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-31</div><div class="title">动态规划之01背包问题</div></div></a></div><div><a href="/2022/01/02/220103CompletePack/" title="动态规划之完全背包问题"><img class="cover" src="https://sanduohou.github.io/file/220103.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="title">动态规划之完全背包问题</div></div></a></div><div><a href="/2022/01/04/220104多重背包/" title="动态规划之多重背包问题"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-04</div><div class="title">动态规划之多重背包问题</div></div></a></div><div><a href="/2022/01/02/220102周赛/" title="LeetCode周赛1月2日"><img class="cover" src="https://sanduohou.github.io/file/220102.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="title">LeetCode周赛1月2日</div></div></a></div><div><a href="/2021/12/24/211225-二叉树的三种遍历方式/" title="一文详解二叉树的三种遍历方式（前序、中序、后序）"><img class="cover" src="https://sanduohou.github.io/file/211225.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-24</div><div class="title">一文详解二叉树的三种遍历方式（前序、中序、后序）</div></div></a></div><div><a href="/2021/12/27/211227-一文详解二叉树的层序遍历/" title="一文详解二叉树的层序遍历"><img class="cover" src="https://sanduohou.github.io/file/211227.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-27</div><div class="title">一文详解二叉树的层序遍历</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 侯三多</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: '6kxIlys6O892N2aKzQ1855Ad-MdYXbMMI',
+      appKey: 'TYEDtfslCH4QT0ODMlHGHaGc',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="//code.tidio.co/jtw2gf0ig0ylkc0so38yv6a0syags4zs.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script></div></body></html>
