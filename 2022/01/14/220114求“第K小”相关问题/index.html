@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>一文详解：求“第k小”相关问题 | 三多之路</title><meta name="keywords" content="LeetCode"><meta name="author" content="侯三多"><meta name="copyright" content="侯三多"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="1.378. 有序矩阵中第 K 小的元素题目给你一个 n x n 矩阵 matrix ，其中每行和每列元素均按升序排序，找到矩阵中第 k 小的元素。请注意，它是 排序后 的第 k 小元素，而不是第 k 个 不同 的元素。 示例 1： 123输入：matrix &#x3D; [[1,5,9],[10,11,13],[12,13,15]], k &#x3D; 8输出：13解释：矩阵中的元素为 [1,5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一文详解：求“第k小”相关问题">
+<meta property="og:url" content="http://example.com/2022/01/14/220114%E6%B1%82%E2%80%9C%E7%AC%ACK%E5%B0%8F%E2%80%9D%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="三多之路">
+<meta property="og:description" content="1.378. 有序矩阵中第 K 小的元素题目给你一个 n x n 矩阵 matrix ，其中每行和每列元素均按升序排序，找到矩阵中第 k 小的元素。请注意，它是 排序后 的第 k 小元素，而不是第 k 个 不同 的元素。 示例 1： 123输入：matrix &#x3D; [[1,5,9],[10,11,13],[12,13,15]], k &#x3D; 8输出：13解释：矩阵中的元素为 [1,5">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-01-14T10:40:30.000Z">
+<meta property="article:modified_time" content="2022-01-14T11:49:53.270Z">
+<meta property="article:author" content="侯三多">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2022/01/14/220114%E6%B1%82%E2%80%9C%E7%AC%ACK%E5%B0%8F%E2%80%9D%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-4938871430544881',
+  enable_page_level_ads: 'true'
+});</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"Author: 侯三多","link":"Link: ","source":"Source: 三多之路","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2022-01-14 19:49:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">18</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三多之路</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">一文详解：求“第k小”相关问题</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-01-14T10:40:30.000Z" title="Created 2022-01-14 18:40:30">2022-01-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-01-14T11:49:53.270Z" title="Updated 2022-01-14 19:49:53">2022-01-14</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>4min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="1-378-有序矩阵中第-K-小的元素"><a href="#1-378-有序矩阵中第-K-小的元素" class="headerlink" title="1.378. 有序矩阵中第 K 小的元素"></a>1.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/">378. 有序矩阵中第 K 小的元素</a></h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给你一个 n x n 矩阵 matrix ，其中每行和每列元素均按升序排序，找到矩阵中第 k 小的元素。<br>请注意，它是 排序后 的第 k 小元素，而不是第 k 个 不同 的元素。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix &#x3D; [[1,5,9],[10,11,13],[12,13,15]], k &#x3D; 8</span><br><span class="line">输出：13</span><br><span class="line">解释：矩阵中的元素为 [1,5,9,10,11,12,13,13,15]，第 8 小元素是 13</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix &#x3D; [[-5]], k &#x3D; 1</span><br><span class="line">输出：-5</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line"></span><br><span class="line">n &#x3D;&#x3D; matrix.length</span><br><span class="line">n &#x3D;&#x3D; matrix[i].length</span><br><span class="line">1 &lt;&#x3D; n &lt;&#x3D; 300</span><br><span class="line">-109 &lt;&#x3D; matrix[i][j] &lt;&#x3D; 109</span><br><span class="line">题目数据 保证 matrix 中的所有行和列都按 非递减顺序 排列</span><br><span class="line">1 &lt;&#x3D; k &lt;&#x3D; n**2</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法一：暴力求解"><a href="#解法一：暴力求解" class="headerlink" title="解法一：暴力求解"></a>解法一：暴力求解</h2><p>暴力求解很简单，只需要把二维数组降维为一维数组，然后排序返回结果即可；</p>
+<p><strong>sum(matrix, [])这个是直接降维的方法，后面遇到类似的记得学习。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">kthSmallest</span>(<span class="params">self, matrix: List[List[int]], k: int</span>) -&gt; int:</span></span><br><span class="line">        nums = sorted(sum(matrix, []))</span><br><span class="line">        <span class="keyword">return</span> nums[k<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：使用堆来解决问题"><a href="#解法二：使用堆来解决问题" class="headerlink" title="解法二：使用堆来解决问题"></a>解法二：使用堆来解决问题</h2><p>关于堆的方法讲解可以参考下面这个题解，非常详细。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/solution/shi-yong-dui-heapde-si-lu-xiang-jie-ling-fu-python/">https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/solution/shi-yong-dui-heapde-si-lu-xiang-jie-ling-fu-python/</a></p>
+<p>大致思想就是，每次我们都从matrix中选择一个最小的元素弹出，当弹出到第k个的时候就是我们需要的。因此我们需要用堆来维护<strong>一组最小候选人</strong>，每次弹出一个最小的，就把最小元素的下一个元素加入到堆中，这样就继续从堆中选择最小元素弹出即可。</p>
+<p>我们选取第一列作为最小候选人，第一列的每一个元素都是当前行最小的元素，每次弹出一个元素，然后把该行的下一个元素加入到堆中，知道弹出k个元素为止。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">kthSmallest</span>(<span class="params">self, matrix: List[List[int]], k: int</span>) -&gt; int:</span></span><br><span class="line">        n = len(matrix) <span class="comment">#注：题目中这个矩阵是n*n的，所以长宽都是n</span></span><br><span class="line">        <span class="comment">#取出第一列候选人，每个候选人组成一个三元组，当前元素以及当前元素的位置</span></span><br><span class="line">        <span class="comment">#matrix[i][0]是具体的值，后面的(i,0)是在记录候选人在矩阵中的位置，方便每次右移添加下一个候选人</span></span><br><span class="line">        heap = [(matrix[i][<span class="number">0</span>], i, <span class="number">0</span>) <span class="keyword">for</span> i <span class="keyword">in</span> range(n)] </span><br><span class="line">        heapq.heapify(heap) <span class="comment">#变成一个heap</span></span><br><span class="line">        print(heap)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(k - <span class="number">1</span>): <span class="comment">#一共弹k次：这里k-1次，return的时候1次</span></span><br><span class="line">            num, x, y = heapq.heappop(heap) <span class="comment">#弹出候选人里最小一个</span></span><br><span class="line">            <span class="keyword">if</span> y != n - <span class="number">1</span>: <span class="comment">#如果这一行还没被弹完</span></span><br><span class="line">                heapq.heappush(heap, (matrix[x][y + <span class="number">1</span>], x, y + <span class="number">1</span>)) <span class="comment">#加入这一行的下一个候选人</span></span><br><span class="line">        <span class="keyword">return</span> heapq.heappop(heap)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="堆的相关操作"><a href="#堆的相关操作" class="headerlink" title="堆的相关操作"></a>堆的相关操作</h2><table>
+<thead>
+<tr>
+<th>函 数</th>
+<th>函 数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>heappush(heap, x)</td>
+<td>将x压入堆中</td>
+</tr>
+<tr>
+<td>heappop(heap)</td>
+<td>从堆中弹出最小的元素</td>
+</tr>
+<tr>
+<td>heapify(heap)</td>
+<td>让列表具备堆特征</td>
+</tr>
+<tr>
+<td>heapreplace(heap, x)</td>
+<td>弹出最小的元素，并将x压入堆中</td>
+</tr>
+<tr>
+<td>nlargest(n, iter)</td>
+<td>返回iter中n个最大的元素</td>
+</tr>
+<tr>
+<td>nsmallest(n, iter)</td>
+<td>返回iter中n个最小的元素</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="comment"># 将x压入堆中</span></span><br><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">heap = []</span><br><span class="line"><span class="comment"># 建立堆，把列表的元素放如到堆heap中</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">    <span class="comment"># 把元素压入到堆中</span></span><br><span class="line">    heapq.heappush(heap, x[i])</span><br><span class="line">print(heap)</span><br><span class="line"><span class="comment"># 从堆中弹出最小的元素</span></span><br><span class="line">print(heapq.heappop(heap))</span><br><span class="line"><span class="comment"># 通过heapify建立堆，可以执行尽可能少的操作</span></span><br><span class="line">heap = [<span class="number">5</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>]</span><br><span class="line">heapq.heapify(heap)</span><br><span class="line">print(heap)</span><br><span class="line"><span class="comment"># 弹出最小的元素，并将10压入堆中</span></span><br><span class="line">heapq.heapreplace(heap, <span class="number">10</span>)</span><br><span class="line">print(heap)</span><br><span class="line"><span class="comment"># 返回heap中n=4个最大的元素</span></span><br><span class="line">print(heapq.nlargest(<span class="number">4</span>, heap))</span><br><span class="line"><span class="comment"># 返回iter中n=3个最小的元素</span></span><br><span class="line">print(heapq.nsmallest(<span class="number">4</span>, heap))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="解法三：二分查找"><a href="#解法三：二分查找" class="headerlink" title="解法三：二分查找"></a>解法三：二分查找</h2><p>上面的堆只是利用了矩阵的当前行元素是逐渐增大这个条件，如果我们把当前列元素也是逐渐增大这个条件用上的话就可以更优化。</p>
+<p>矩阵中的最小值为left = matrix[0] [0]，最大值为right = matrix[-1] [-1]，我们取中间值mid = (left + right) // 2，如果我们在矩阵中把大于mid的值和小于mid的值分开就会发现可以把矩阵分为两个部分。</p>
+<img src="/2022/01/14/220114%E6%B1%82%E2%80%9C%E7%AC%ACK%E5%B0%8F%E2%80%9D%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/1.png" class>
+
+<p>所以我们只需要统计mid左边的数量，以及mid右边的数量，然后比较一下就可以知道，当前的mid是大了还是笑了，如果左边的数量&gt;k那么说明mid太大了，需要减小；如果右边的数量&gt;k那么说明mid太小了，需要增大。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">kthSmallest</span>(<span class="params">self, matrix: List[List[int]], k: int</span>) -&gt; int:</span></span><br><span class="line">        n = len(matrix)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">check</span>(<span class="params">mid</span>):</span></span><br><span class="line">            <span class="comment"># 从左下角开始查找，这样可以保证mid始终比自己左上角的值大</span></span><br><span class="line">            num = <span class="number">0</span></span><br><span class="line">            i, j = n - <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt; n:</span><br><span class="line">                <span class="keyword">if</span> matrix[i][j] &lt;= mid:</span><br><span class="line">                    num += i + <span class="number">1</span></span><br><span class="line">                    j += <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    i -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> num &gt;= k <span class="comment"># 判断num是否大于等于k</span></span><br><span class="line">        left, right = matrix[<span class="number">0</span>][<span class="number">0</span>], matrix[<span class="number">-1</span>][<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            mid = (left + right) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> check(mid):</span><br><span class="line">                right = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = mid + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> left                </span><br></pre></td></tr></table></figure>
+
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LeetCode/">LeetCode</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/12/220112%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">一文详解“最长递增子序列及其变形”</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/01/02/220102周赛/" title="LeetCode周赛1月2日"><img class="cover" src="https://sanduohou.github.io/file/220102.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="title">LeetCode周赛1月2日</div></div></a></div><div><a href="/2021/12/24/211225-二叉树的三种遍历方式/" title="一文详解二叉树的三种遍历方式（前序、中序、后序）"><img class="cover" src="https://sanduohou.github.io/file/211225.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-24</div><div class="title">一文详解二叉树的三种遍历方式（前序、中序、后序）</div></div></a></div><div><a href="/2021/12/27/211227-一文详解二叉树的层序遍历/" title="一文详解二叉树的层序遍历"><img class="cover" src="https://sanduohou.github.io/file/211227.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-27</div><div class="title">一文详解二叉树的层序遍历</div></div></a></div><div><a href="/2021/12/31/211231-背包问题学习笔记/" title="动态规划之01背包问题"><img class="cover" src="https://sanduohou.github.io/file/211231.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-31</div><div class="title">动态规划之01背包问题</div></div></a></div><div><a href="/2021/12/29/211229-一文详解回溯算法/" title="一文详解回溯算法"><img class="cover" src="https://sanduohou.github.io/file/211229.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-29</div><div class="title">一文详解回溯算法</div></div></a></div><div><a href="/2022/01/02/220103CompletePack/" title="动态规划之完全背包问题"><img class="cover" src="https://sanduohou.github.io/file/220103.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="title">动态规划之完全背包问题</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 侯三多</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: '6kxIlys6O892N2aKzQ1855Ad-MdYXbMMI',
+      appKey: 'TYEDtfslCH4QT0ODMlHGHaGc',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="//code.tidio.co/jtw2gf0ig0ylkc0so38yv6a0syags4zs.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script></div></body></html>
