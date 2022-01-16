@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第276场周赛 | 三多之路</title><meta name="keywords" content="LeetCode,周赛"><meta name="author" content="侯三多"><meta name="copyright" content="侯三多"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="1.5980. 将字符串拆分为若干长度为 k 的组题目字符串 s 可以按下述步骤划分为若干长度为 k 的组： 第一组由字符串中的前 k 个字符组成，第二组由接下来的 k 个字符串组成，依此类推。每个字符都能够成为 某一个 组的一部分。对于最后一组，如果字符串剩下的字符 不足 k 个，需使用字符 fill 来补全这一组字符。注意，在去除最后一个组的填充字符 fill（如果存在的话）并按顺序连接所有的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第276场周赛">
+<meta property="og:url" content="http://example.com/2022/01/16/220116-276%E5%91%A8%E8%B5%9B/index.html">
+<meta property="og:site_name" content="三多之路">
+<meta property="og:description" content="1.5980. 将字符串拆分为若干长度为 k 的组题目字符串 s 可以按下述步骤划分为若干长度为 k 的组： 第一组由字符串中的前 k 个字符组成，第二组由接下来的 k 个字符串组成，依此类推。每个字符都能够成为 某一个 组的一部分。对于最后一组，如果字符串剩下的字符 不足 k 个，需使用字符 fill 来补全这一组字符。注意，在去除最后一个组的填充字符 fill（如果存在的话）并按顺序连接所有的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-01-16T07:12:37.000Z">
+<meta property="article:modified_time" content="2022-01-16T07:30:46.836Z">
+<meta property="article:author" content="侯三多">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="周赛">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2022/01/16/220116-276%E5%91%A8%E8%B5%9B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-4938871430544881',
+  enable_page_level_ads: 'true'
+});</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"Author: 侯三多","link":"Link: ","source":"Source: 三多之路","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2022-01-16 15:30:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">20</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">12</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三多之路</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">第276场周赛</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-01-16T07:12:37.000Z" title="Created 2022-01-16 15:12:37">2022-01-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-01-16T07:30:46.836Z" title="Updated 2022-01-16 15:30:46">2022-01-16</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>7min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="1-5980-将字符串拆分为若干长度为-k-的组"><a href="#1-5980-将字符串拆分为若干长度为-k-的组" class="headerlink" title="1.5980. 将字符串拆分为若干长度为 k 的组"></a>1.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/divide-a-string-into-groups-of-size-k/">5980. 将字符串拆分为若干长度为 k 的组</a></h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>字符串 s 可以按下述步骤划分为若干长度为 k 的组：</p>
+<p>第一组由字符串中的前 k 个字符组成，第二组由接下来的 k 个字符串组成，依此类推。每个字符都能够成为 某一个 组的一部分。<br>对于最后一组，如果字符串剩下的字符 不足 k 个，需使用字符 fill 来补全这一组字符。<br>注意，在去除最后一个组的填充字符 fill（如果存在的话）并按顺序连接所有的组后，所得到的字符串应该是 s 。</p>
+<p>给你一个字符串 s ，以及每组的长度 k 和一个用于填充的字符 fill ，按上述步骤处理之后，返回一个字符串数组，该数组表示 s 分组后 每个组的组成情况 。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot;abcdefghi&quot;, k &#x3D; 3, fill &#x3D; &quot;x&quot;</span><br><span class="line">输出：[&quot;abc&quot;,&quot;def&quot;,&quot;ghi&quot;]</span><br><span class="line">解释：</span><br><span class="line">前 3 个字符是 &quot;abc&quot; ，形成第一组。</span><br><span class="line">接下来 3 个字符是 &quot;def&quot; ，形成第二组。</span><br><span class="line">最后 3 个字符是 &quot;ghi&quot; ，形成第三组。</span><br><span class="line">由于所有组都可以由字符串中的字符完全填充，所以不需要使用填充字符。</span><br><span class="line">因此，形成 3 组，分别是 &quot;abc&quot;、&quot;def&quot; 和 &quot;ghi&quot; 。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：s &#x3D; &quot;abcdefghij&quot;, k &#x3D; 3, fill &#x3D; &quot;x&quot;</span><br><span class="line">输出：[&quot;abc&quot;,&quot;def&quot;,&quot;ghi&quot;,&quot;jxx&quot;]</span><br><span class="line">解释：</span><br><span class="line">与前一个例子类似，形成前三组 &quot;abc&quot;、&quot;def&quot; 和 &quot;ghi&quot; 。</span><br><span class="line">对于最后一组，字符串中仅剩下字符 &#39;j&#39; 可以用。为了补全这一组，使用填充字符 &#39;x&#39; 两次。</span><br><span class="line">因此，形成 4 组，分别是 &quot;abc&quot;、&quot;def&quot;、&quot;ghi&quot; 和 &quot;jxx&quot; 。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line">1 &lt;&#x3D; s.length &lt;&#x3D; 100</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;&#x3D; k &lt;&#x3D; 100</span><br><span class="line">fill 是一个小写英文字母</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法：简单模拟"><a href="#解法：简单模拟" class="headerlink" title="解法：简单模拟"></a>解法：简单模拟</h2><p>首先判断一下长度，然后把需要填充的fill数量计算出来并加进去，最后遍历每k个输出即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">divideString</span>(<span class="params">self, s: str, k: int, fill: str</span>) -&gt; List[str]:</span></span><br><span class="line">        n = len(s)</span><br><span class="line">        m = n % k</span><br><span class="line">        s += fill * (k - m)</span><br><span class="line">        ans = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, n, k):</span><br><span class="line">            ans.append(s[i:i+k])</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-5194-得到目标值的最少行动次数"><a href="#2-5194-得到目标值的最少行动次数" class="headerlink" title="2.5194. 得到目标值的最少行动次数"></a>2.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-moves-to-reach-target-score/">5194. 得到目标值的最少行动次数</a></h1><h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>你正在玩一个整数游戏。从整数 1 开始，期望得到整数 target 。</p>
+<p>在一次行动中，你可以做下述两种操作之一：</p>
+<p>递增，将当前整数的值加 1（即， x = x + 1）。<br>加倍，使当前整数的值翻倍（即，x = 2 * x）。<br>在整个游戏过程中，你可以使用 递增 操作 任意 次数。但是只能使用 加倍 操作 至多 maxDoubles 次。</p>
+<p>给你两个整数 target 和 maxDoubles ，返回从 1 开始得到 target 需要的最少行动次数。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：target &#x3D; 5, maxDoubles &#x3D; 0</span><br><span class="line">输出：4</span><br><span class="line">解释：一直递增 1 直到得到 target 。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：target &#x3D; 19, maxDoubles &#x3D; 2</span><br><span class="line">输出：7</span><br><span class="line">解释：最初，x &#x3D; 1 。</span><br><span class="line">递增 3 次，x &#x3D; 4 。</span><br><span class="line">加倍 1 次，x &#x3D; 8 。</span><br><span class="line">递增 1 次，x &#x3D; 9 。</span><br><span class="line">加倍 1 次，x &#x3D; 18 。</span><br><span class="line">递增 1 次，x &#x3D; 19 。</span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：target &#x3D; 10, maxDoubles &#x3D; 4</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">最初，x &#x3D; 1 。 </span><br><span class="line">递增 1 次，x &#x3D; 2 。 </span><br><span class="line">加倍 1 次，x &#x3D; 4 。 </span><br><span class="line">递增 1 次，x &#x3D; 5 。 </span><br><span class="line">加倍 1 次，x &#x3D; 10 。 </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line">1 &lt;&#x3D; target &lt;&#x3D; 10**9</span><br><span class="line">0 &lt;&#x3D; maxDoubles &lt;&#x3D; 100</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法：反向dp"><a href="#解法：反向dp" class="headerlink" title="解法：反向dp"></a>解法：反向dp</h2><p>刚开始想着能不能用回溯做，结果是正确的，但是超时，因为数据比较大10**9；后来想着用动态规划，结果正确，但是会超时。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> target &gt; <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">if</span> target % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">and</span> maxDoubles &gt; <span class="number">0</span>:</span><br><span class="line">        dp[int(target / <span class="number">2</span>)] = dp[target] + <span class="number">1</span></span><br><span class="line">        target = int(target / <span class="number">2</span>)</span><br><span class="line">        maxDoubles -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dp[target - <span class="number">1</span>] = min(dp[target] + <span class="number">1</span>, dp[target - <span class="number">1</span>])</span><br><span class="line">        target -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>就想着优化，需要从后面出发（原来的乘以2变为除以2，原来的加1变为减1），遇到合适的就先利用double除以2，不合适的就递减即可。</p>
+<p>如果走到中间maxDoubles用完了，就说明剩下的全部都是-1操作，直接跳出循环即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minMoves</span>(<span class="params">self, target: int, maxDoubles: int</span>) -&gt; int:</span></span><br><span class="line">        pre = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> target &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> target % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">and</span> maxDoubles &gt; <span class="number">0</span>:</span><br><span class="line">                pre = pre + <span class="number">1</span></span><br><span class="line">                target = int(target / <span class="number">2</span>)</span><br><span class="line">                maxDoubles -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> maxDoubles &gt; <span class="number">0</span>:</span><br><span class="line">                pre = pre + <span class="number">1</span></span><br><span class="line">                target -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> maxDoubles == <span class="number">0</span>:</span><br><span class="line">                pre += target - <span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> pre</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-5982-解决智力问题"><a href="#3-5982-解决智力问题" class="headerlink" title="3.5982. 解决智力问题"></a>3.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/solving-questions-with-brainpower/">5982. 解决智力问题</a></h1><h2 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h2><p>给你一个下标从 0 开始的二维整数数组 questions ，其中 questions[i] = [pointsi, brainpoweri] 。</p>
+<p>这个数组表示一场考试里的一系列题目，你需要 按顺序 （也就是从问题 0 开始依次解决），针对每个问题选择 解决 或者 跳过 操作。解决问题 i 将让你 获得  pointsi 的分数，但是你将 无法 解决接下来的 brainpoweri 个问题（即只能跳过接下来的 brainpoweri 个问题）。如果你跳过问题 i ，你可以对下一个问题决定使用哪种操作。</p>
+<p>比方说，给你 questions = [[3, 2], [4, 3], [4, 4], [2, 5]] ：<br>如果问题 0 被解决了， 那么你可以获得 3 分，但你不能解决问题 1 和 2 。<br>如果你跳过问题 0 ，且解决问题 1 ，你将获得 4 分但是不能解决问题 2 和 3 。<br>请你返回这场考试里你能获得的 最高 分数。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：questions &#x3D; [[3,2],[4,3],[4,4],[2,5]]</span><br><span class="line">输出：5</span><br><span class="line">解释：解决问题 0 和 3 得到最高分。</span><br><span class="line"></span><br><span class="line">- 解决问题 0 ：获得 3 分，但接下来 2 个问题都不能解决。</span><br><span class="line">- 不能解决问题 1 和 2</span><br><span class="line">- 解决问题 3 ：获得 2 分</span><br><span class="line">  总得分为：3 + 2 &#x3D; 5 。没有别的办法获得 5 分或者多于 5 分。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：questions &#x3D; [[1,1],[2,2],[3,3],[4,4],[5,5]]</span><br><span class="line">输出：7</span><br><span class="line">解释：解决问题 1 和 4 得到最高分。</span><br><span class="line">- 跳过问题 0</span><br><span class="line">- 解决问题 1 ：获得 2 分，但接下来 2 个问题都不能解决。</span><br><span class="line">- 不能解决问题 2 和 3</span><br><span class="line">- 解决问题 4 ：获得 5 分</span><br><span class="line">  总得分为：2 + 5 &#x3D; 7 。没有别的办法获得 7 分或者多于 7 分。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line">1 &lt;&#x3D; questions.length &lt;&#x3D; 105</span><br><span class="line">questions[i].length &#x3D;&#x3D; 2</span><br><span class="line">1 &lt;&#x3D; pointsi, brainpoweri &lt;&#x3D; 105</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>第三题和第二题，解决思路是差不多的，因为都存在一个选择和不选择问题，就想着用回溯，结果是不行的；然后就用动态规划，超出时间限制，就需要不停优化。这个题目没有做出来，参考了一下其他人的答案。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mostPoints</span>(<span class="params">self, questions: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        n = len(questions)</span><br><span class="line">        dp = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">            q = questions[i]</span><br><span class="line">            j = i + q[<span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">            dp[i] = max(dp[i + <span class="number">1</span>], q[<span class="number">0</span>] + (dp[j] <span class="keyword">if</span> j &lt; n <span class="keyword">else</span> <span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>下面这个解法就是递归（回溯），用的非常好，但是更好的地方是用了一个@functools.lru_cache(None)，还是第一次遇到，如果没有这一行代码是无法通过的，会超时，用了之后就可以通过。</p>
+<p>在functools这个模块中，有lru_cache这个一个神奇的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%A3%85%E9%A5%B0%E5%99%A8&spm=1001.2101.3001.7020">装饰器</a>存在。functools.lru_cache的作用主要是用来做缓存，他能把相对耗时的函数结果进行保存，避免传入相同的参数重复计算。同时，缓存并不会无限增长，不用的缓存会被释放。</p>
+<p>具体用法可以参考这里：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wzqnls/article/details/78506022">https://blog.csdn.net/wzqnls/article/details/78506022</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mostPoints</span>(<span class="params">self, questions: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        </span><br><span class="line"><span class="meta">        @functools.lru_cache(None)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">solve</span>(<span class="params">t=<span class="number">0</span></span>) :</span></span><br><span class="line">            <span class="keyword">if</span> t &gt;= len(questions) :</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            points, brainpower = questions[t]</span><br><span class="line">            <span class="keyword">return</span> max(points+solve(t+brainpower+<span class="number">1</span>), solve(t+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">return</span> solve()</span><br></pre></td></tr></table></figure>
+
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LeetCode/">LeetCode</a><a class="post-meta__tags" href="/tags/%E5%91%A8%E8%B5%9B/">周赛</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/15/220115%E5%A0%86%EF%BC%88%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%89/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">一文详解：堆（优先队列）应用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/01/02/220102周赛/" title="LeetCode周赛1月2日"><img class="cover" src="https://sanduohou.github.io/file/220102.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="title">LeetCode周赛1月2日</div></div></a></div><div><a href="/2021/12/24/211225-二叉树的三种遍历方式/" title="一文详解二叉树的三种遍历方式（前序、中序、后序）"><img class="cover" src="https://sanduohou.github.io/file/211225.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-24</div><div class="title">一文详解二叉树的三种遍历方式（前序、中序、后序）</div></div></a></div><div><a href="/2021/12/27/211227-一文详解二叉树的层序遍历/" title="一文详解二叉树的层序遍历"><img class="cover" src="https://sanduohou.github.io/file/211227.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-27</div><div class="title">一文详解二叉树的层序遍历</div></div></a></div><div><a href="/2021/12/31/211231-背包问题学习笔记/" title="动态规划之01背包问题"><img class="cover" src="https://sanduohou.github.io/file/211231.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-31</div><div class="title">动态规划之01背包问题</div></div></a></div><div><a href="/2021/12/29/211229-一文详解回溯算法/" title="一文详解回溯算法"><img class="cover" src="https://sanduohou.github.io/file/211229.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-29</div><div class="title">一文详解回溯算法</div></div></a></div><div><a href="/2022/01/02/220103CompletePack/" title="动态规划之完全背包问题"><img class="cover" src="https://sanduohou.github.io/file/220103.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="title">动态规划之完全背包问题</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 侯三多</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: '6kxIlys6O892N2aKzQ1855Ad-MdYXbMMI',
+      appKey: 'TYEDtfslCH4QT0ODMlHGHaGc',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="//code.tidio.co/jtw2gf0ig0ylkc0so38yv6a0syags4zs.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script></div></body></html>

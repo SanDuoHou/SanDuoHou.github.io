@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>一文详解：堆（优先队列）应用 | 三多之路</title><meta name="keywords" content="LeetCode,堆（优先队列）"><meta name="author" content="侯三多"><meta name="copyright" content="侯三多"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="1. 堆的相关操作   函 数 函 数    heappush(heap, x) 将x压入堆中   heappop(heap) 从堆中弹出最小的元素   heapify(heap) 让列表具备堆特征   heapreplace(heap, x) 弹出最小的元素，并将x压入堆中   nlargest(n, iter) 返回iter中n个最大的元素   nsmallest(n, iter) 返回ite">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一文详解：堆（优先队列）应用">
+<meta property="og:url" content="http://example.com/2022/01/15/220115%E5%A0%86%EF%BC%88%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%89/index.html">
+<meta property="og:site_name" content="三多之路">
+<meta property="og:description" content="1. 堆的相关操作   函 数 函 数    heappush(heap, x) 将x压入堆中   heappop(heap) 从堆中弹出最小的元素   heapify(heap) 让列表具备堆特征   heapreplace(heap, x) 弹出最小的元素，并将x压入堆中   nlargest(n, iter) 返回iter中n个最大的元素   nsmallest(n, iter) 返回ite">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-01-15T07:29:33.000Z">
+<meta property="article:modified_time" content="2022-01-15T09:07:15.154Z">
+<meta property="article:author" content="侯三多">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="堆（优先队列）">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://example.com/2022/01/15/220115%E5%A0%86%EF%BC%88%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-4938871430544881',
+  enable_page_level_ads: 'true'
+});</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":100,"languages":{"author":"Author: 侯三多","link":"Link: ","source":"Source: 三多之路","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2022-01-15 17:07:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">20</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">12</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">三多之路</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-cloud-sun"></i><span> Comments</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">一文详解：堆（优先队列）应用</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-01-15T07:29:33.000Z" title="Created 2022-01-15 15:29:33">2022-01-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-01-15T09:07:15.154Z" title="Updated 2022-01-15 17:07:15">2022-01-15</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>8min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="1-堆的相关操作"><a href="#1-堆的相关操作" class="headerlink" title="1. 堆的相关操作"></a>1. 堆的相关操作</h1><table>
+<thead>
+<tr>
+<th>函 数</th>
+<th>函 数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>heappush(heap, x)</td>
+<td>将x压入堆中</td>
+</tr>
+<tr>
+<td>heappop(heap)</td>
+<td>从堆中弹出最小的元素</td>
+</tr>
+<tr>
+<td>heapify(heap)</td>
+<td>让列表具备堆特征</td>
+</tr>
+<tr>
+<td>heapreplace(heap, x)</td>
+<td>弹出最小的元素，并将x压入堆中</td>
+</tr>
+<tr>
+<td>nlargest(n, iter)</td>
+<td>返回iter中n个最大的元素</td>
+</tr>
+<tr>
+<td>nsmallest(n, iter)</td>
+<td>返回iter中n个最小的元素</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="comment"># 将x压入堆中</span></span><br><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">heap = []</span><br><span class="line"><span class="comment"># 建立堆，把列表的元素放如到堆heap中</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">    <span class="comment"># 把元素压入到堆中</span></span><br><span class="line">    heapq.heappush(heap, x[i])</span><br><span class="line">print(heap)</span><br><span class="line"><span class="comment"># 从堆中弹出最小的元素</span></span><br><span class="line">print(heapq.heappop(heap))</span><br><span class="line"><span class="comment"># 通过heapify建立堆，可以执行尽可能少的操作</span></span><br><span class="line">heap = [<span class="number">5</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>]</span><br><span class="line">heapq.heapify(heap)</span><br><span class="line">print(heap)</span><br><span class="line"><span class="comment"># 弹出最小的元素，并将10压入堆中</span></span><br><span class="line">heapq.heapreplace(heap, <span class="number">10</span>)</span><br><span class="line">print(heap)</span><br><span class="line"><span class="comment"># 返回heap中n=4个最大的元素</span></span><br><span class="line">print(heapq.nlargest(<span class="number">4</span>, heap))</span><br><span class="line"><span class="comment"># 返回iter中n=3个最小的元素</span></span><br><span class="line">print(heapq.nsmallest(<span class="number">4</span>, heap))</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-面试题-17-09-第-k-个数"><a href="#2-面试题-17-09-第-k-个数" class="headerlink" title="2.面试题 17.09. 第 k 个数"></a>2.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/get-kth-magic-number-lcci/">面试题 17.09. 第 k 个数</a></h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有些数的素因子只有 3，5，7，请设计一个算法找出第 k 个数。注意，不是必须有这些素因子，而是必须不包含其他的素因子。例如，前几个数按顺序应该是 1，3，5，7，9，15，21。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: k &#x3D; 5</span><br><span class="line">输出: 9</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法一：堆"><a href="#解法一：堆" class="headerlink" title="解法一：堆"></a>解法一：堆</h2><p>题目已经指定素因子只有3，5，7三个数字，我们先把这三个数字压入堆中，每次弹出一个数字，然后把弹出的数字分别乘3，5，7再压入堆中，以此类推即可。</p>
+<p>需要注意的是，压入堆中的元素会存在重复，例如弹出3的时候会压入9，15，21；弹出5的时候，会压入15，25，35；这里就会存在15的重复。</p>
+<p>所以我们每次弹出一个最小元素的时候，需要判断一下堆中当前最小元素与之前弹出的最小元素是否相等，如果相等就需要把其弹出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getKthMagicNumber</span>(<span class="params">self, k: int</span>) -&gt; int:</span></span><br><span class="line">        heap = [<span class="number">1</span>]</span><br><span class="line">        heapq.heapify(heap)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">            res = heapq.heappop(heap)</span><br><span class="line">            <span class="keyword">while</span> heap <span class="keyword">and</span> res == heap[<span class="number">0</span>]:  <span class="comment">#去除重复元素</span></span><br><span class="line">                <span class="comment"># 我们只需要往里面加元素即可，当弹出最小元素的时候，我们判断弹出的元素与堆最小的第元素是否相等</span></span><br><span class="line">                <span class="comment"># 如果相等就继续弹出，直至不想等</span></span><br><span class="line">                heapq.heappop(heap)</span><br><span class="line">            <span class="comment"># 把当前元素的相关元素压入堆中</span></span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> [<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>]:</span><br><span class="line">                heapq.heappush(heap, res * num)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：动态规划（三指针）"><a href="#解法二：动态规划（三指针）" class="headerlink" title="解法二：动态规划（三指针）"></a>解法二：动态规划（三指针）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getKthMagicNumber</span>(<span class="params">self, k: int</span>) -&gt; int:</span></span><br><span class="line">        res = [<span class="number">1</span>]</span><br><span class="line">        idx3, idx5, idx7 = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(k<span class="number">-1</span>):</span><br><span class="line">            a, b, c = res[idx3] * <span class="number">3</span>, res[idx5] * <span class="number">5</span>, res[idx7] * <span class="number">7</span></span><br><span class="line">            res.append(min(a, b, c))</span><br><span class="line">            <span class="comment"># 三个if一定要都执行，不能够用elif，这样就可以保证如果有相同的数字，都可以执行+1操作</span></span><br><span class="line">            <span class="keyword">if</span> res[<span class="number">-1</span>] == a:</span><br><span class="line">                idx3 += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> res[<span class="number">-1</span>] == b:</span><br><span class="line">                idx5 += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> res[<span class="number">-1</span>] == c:</span><br><span class="line">                idx7 += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-264-丑数-II"><a href="#3-264-丑数-II" class="headerlink" title="3.264. 丑数 II"></a>3.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ugly-number-ii/">264. 丑数 II</a></h1><h2 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h2><p>给你一个整数 n ，请你找出并返回第 n 个 丑数 。</p>
+<p>丑数 就是只包含质因数 2、3 和/或 5 的正整数。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 10</span><br><span class="line">输出：12</span><br><span class="line">解释：[1, 2, 3, 4, 5, 6, 8, 9, 10, 12] 是由前 10 个丑数组成的序列。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 1</span><br><span class="line">输出：1</span><br><span class="line">解释：1 通常被视为丑数。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line">1 &lt;&#x3D; n &lt;&#x3D; 1690</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法一：堆-1"><a href="#解法一：堆-1" class="headerlink" title="解法一：堆"></a>解法一：堆</h2><p>方法和上面一题一模一样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nthUglyNumber</span>(<span class="params">self, n: int</span>) -&gt; int:</span></span><br><span class="line">        heap = [<span class="number">1</span>]</span><br><span class="line">        heapq.heapify(heap)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            res = heapq.heappop(heap)</span><br><span class="line">            <span class="keyword">while</span> heap <span class="keyword">and</span> res == heap[<span class="number">0</span>]:</span><br><span class="line">                heapq.heappop(heap)</span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> [<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>]:</span><br><span class="line">                heapq.heappush(heap, res * num)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：动态规划（三指针）-1"><a href="#解法二：动态规划（三指针）-1" class="headerlink" title="解法二：动态规划（三指针）"></a>解法二：动态规划（三指针）</h2><p>这个思路不是很好想出来。</p>
+<p>可以这样理解：</p>
+<p>初始的时候，idx2, idx3, idx5 = 0, 0, 0，第一轮之后会把2加入到队列，然后</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>a,b,c</th>
+<th>res</th>
+<th>idx2， idx3， idx5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始的时候</td>
+<td></td>
+<td>1</td>
+<td>0， 0， 0</td>
+</tr>
+<tr>
+<td>第一轮</td>
+<td>2，3，5</td>
+<td>1，2</td>
+<td>1， 0， 0</td>
+</tr>
+<tr>
+<td>第二轮</td>
+<td>4，3，5</td>
+<td>1，2，3</td>
+<td>1，1，0</td>
+</tr>
+<tr>
+<td>第三轮</td>
+<td>4，6，5</td>
+<td>1，2，3，5</td>
+<td>1，1，1</td>
+</tr>
+</tbody></table>
+<p>这样推导一下就可以很清晰看出来，每次用idx2， idx3， idx5来标记当前需要加入的最小值，而且保证每个数都可以乘2，3，5，只是先后顺序受到控制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nthUglyNumber</span>(<span class="params">self, n: int</span>) -&gt; int:</span></span><br><span class="line">        res = [<span class="number">1</span>]</span><br><span class="line">        idx2, idx3, idx5 = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n - <span class="number">1</span>):</span><br><span class="line">            a, b, c = res[idx2] * <span class="number">2</span>, res[idx3] * <span class="number">3</span>, res[idx5] * <span class="number">5</span></span><br><span class="line">            res.append(min(a, b, c))</span><br><span class="line">            <span class="keyword">if</span> res[<span class="number">-1</span>] == a:</span><br><span class="line">                idx2 += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> res[<span class="number">-1</span>] == b:</span><br><span class="line">                idx3 += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> res[<span class="number">-1</span>] == c:</span><br><span class="line">                idx5 += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-313-超级丑数"><a href="#4-313-超级丑数" class="headerlink" title="4.313. 超级丑数"></a>4.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/super-ugly-number/">313. 超级丑数</a></h1><h2 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h2><p>超级丑数 是一个正整数，并满足其所有质因数都出现在质数数组 primes 中。</p>
+<p>给你一个整数 n 和一个整数数组 primes ，返回第 n 个 超级丑数 。</p>
+<p>题目数据保证第 n 个 超级丑数 在 32-bit 带符号整数范围内。</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 12, primes &#x3D; [2,7,13,19]</span><br><span class="line">输出：32 </span><br><span class="line">解释：给定长度为 4 的质数数组 primes &#x3D; [2,7,13,19]，前 12 个超级丑数序列为：[1,2,4,7,8,13,14,16,19,26,28,32] 。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 1, primes &#x3D; [2,3,5]</span><br><span class="line">输出：1</span><br><span class="line">解释：1 不含质因数，因此它的所有质因数都在质数数组 primes &#x3D; [2,3,5] 中。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">提示：</span><br><span class="line">1 &lt;&#x3D; n &lt;&#x3D; 106</span><br><span class="line">1 &lt;&#x3D; primes.length &lt;&#x3D; 100</span><br><span class="line">2 &lt;&#x3D; primes[i] &lt;&#x3D; 1000</span><br><span class="line">题目数据 保证 primes[i] 是一个质数</span><br><span class="line">primes 中的所有值都 互不相同 ，且按 递增顺序 排列</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法一：堆（超出时间限制）"><a href="#解法一：堆（超出时间限制）" class="headerlink" title="解法一：堆（超出时间限制）"></a>解法一：堆（超出时间限制）</h2><p>思路和上面讲的一模一样。</p>
+<p>时间超时，应该是不太好优化了，尝试了第二种方法优化，减少了一些执行次数，但是还是不能够通过，参考几个解答可能都是之前的解法，后面增加了测试数据之后，还是无法通过，但是整体的思路是正确的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nthSuperUglyNumber</span>(<span class="params">self, n: int, primes: List[int]</span>) -&gt; int:</span></span><br><span class="line">        heap = [<span class="number">1</span>]</span><br><span class="line">        heapq.heapify(heap)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            res = heapq.heappop(heap)</span><br><span class="line">            <span class="keyword">while</span> heap <span class="keyword">and</span> res == heap[<span class="number">0</span>]:</span><br><span class="line">                heapq.heappop(heap)</span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> primes:</span><br><span class="line">                heapq.heappush(heap, res * num)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nthSuperUglyNumber</span>(<span class="params">self, n: int, primes: List[int]</span>) -&gt; int:</span></span><br><span class="line">        heap = [<span class="number">1</span>]</span><br><span class="line">        seen = &#123;<span class="number">1</span>&#125; <span class="comment"># 把已经出现的数字加入进来，防止重复加入</span></span><br><span class="line">        heapq.heapify(heap)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            res = heapq.heappop(heap)</span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> primes:</span><br><span class="line">                next_ = res * num</span><br><span class="line">                <span class="keyword">if</span>  next_ <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                    heapq.heappush(heap, next_)</span><br><span class="line">                    seen.add(next_)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法二：动态规划"><a href="#解法二：动态规划" class="headerlink" title="解法二：动态规划"></a>解法二：动态规划</h2><p>这个题和上面的丑数2类似，但是现在因子变成了一个动态的primes，所以需要我们转变一下思路，设置一个index来标记每个因子的位置代替上面的idx，设置一个nums来代替上面的abc，依然是从nums中取出一个最小的加入到res中，然后把idx对应+1操作。</p>
+<p>但是不能够用两层循环来实现，因为会出现超时的情况，下面这个版本就是把nums和index分开循环，最终提交的结果会超时报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nthSuperUglyNumber</span>(<span class="params">self, n: int, primes: List[int]</span>) -&gt; int:</span></span><br><span class="line">        res = [<span class="number">1</span>]</span><br><span class="line">        m = len(primes)</span><br><span class="line">        index = [<span class="number">0</span>] * m</span><br><span class="line">        nums = [<span class="number">1</span>] * m</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                nums[j] = res[index[j]] * primes[j]</span><br><span class="line">            min_ = min(nums)</span><br><span class="line">            res.append(min_)</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                <span class="keyword">if</span> nums[j] == min_:</span><br><span class="line">                    index[j] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>既然思路已经有了，我们就可以想办法进行优化，依然是上面的思路，我们把第二层for循环合并为一个，只要我们初始化的时候先把nums最小值放进来，然后再同时执行index+1操作以及求下一次的nums就可以完美解决这个问题了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nthSuperUglyNumber</span>(<span class="params">self, n: int, primes: List[int]</span>) -&gt; int:</span></span><br><span class="line">        res = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        m = len(primes)</span><br><span class="line">        index = [<span class="number">0</span>] * m</span><br><span class="line">        nums = [<span class="number">1</span>] * m</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            min_ = min(nums)</span><br><span class="line">            res[i] = min_</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                <span class="keyword">if</span> nums[j] == min_:</span><br><span class="line">                    index[j] += <span class="number">1</span></span><br><span class="line">                    nums[j] = res[index[j]] * primes[j]</span><br><span class="line">        <span class="keyword">return</span> res[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LeetCode/">LeetCode</a><a class="post-meta__tags" href="/tags/%E5%A0%86%EF%BC%88%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%89/">堆（优先队列）</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/01/16/220116-276%E5%91%A8%E8%B5%9B/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">第276场周赛</div></div></a></div><div class="next-post pull-right"><a href="/2022/01/14/220114%E6%B1%82%E2%80%9C%E7%AC%ACK%E5%B0%8F%E2%80%9D%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"><img class="next-cover" src="https://sanduohou.github.io/file/220114.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">一文详解：求“第k小”相关问题</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/01/14/220114求“第K小”相关问题/" title="一文详解：求“第k小”相关问题"><img class="cover" src="https://sanduohou.github.io/file/220114.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-14</div><div class="title">一文详解：求“第k小”相关问题</div></div></a></div><div><a href="/2022/01/02/220102周赛/" title="LeetCode周赛1月2日"><img class="cover" src="https://sanduohou.github.io/file/220102.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-02</div><div class="title">LeetCode周赛1月2日</div></div></a></div><div><a href="/2021/12/24/211225-二叉树的三种遍历方式/" title="一文详解二叉树的三种遍历方式（前序、中序、后序）"><img class="cover" src="https://sanduohou.github.io/file/211225.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-24</div><div class="title">一文详解二叉树的三种遍历方式（前序、中序、后序）</div></div></a></div><div><a href="/2021/12/27/211227-一文详解二叉树的层序遍历/" title="一文详解二叉树的层序遍历"><img class="cover" src="https://sanduohou.github.io/file/211227.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-27</div><div class="title">一文详解二叉树的层序遍历</div></div></a></div><div><a href="/2021/12/31/211231-背包问题学习笔记/" title="动态规划之01背包问题"><img class="cover" src="https://sanduohou.github.io/file/211231.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-31</div><div class="title">动态规划之01背包问题</div></div></a></div><div><a href="/2021/12/29/211229-一文详解回溯算法/" title="一文详解回溯算法"><img class="cover" src="https://sanduohou.github.io/file/211229.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-29</div><div class="title">一文详解回溯算法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 侯三多</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: '6kxIlys6O892N2aKzQ1855Ad-MdYXbMMI',
+      appKey: 'TYEDtfslCH4QT0ODMlHGHaGc',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="//code.tidio.co/jtw2gf0ig0ylkc0so38yv6a0syags4zs.js" async="async"></script><script>function onTidioChatApiReady() {
+  window.tidioChatApi.hide();
+  window.tidioChatApi.on("close", function() {
+    window.tidioChatApi.hide();
+  });
+}
+if (window.tidioChatApi) {
+  window.tidioChatApi.on("ready", onTidioChatApiReady);
+} else {
+  document.addEventListener("tidioChat-ready", onTidioChatApiReady);
+}
+
+var chatBtnFn = () => {
+  document.getElementById("chat_btn").addEventListener("click", function(){
+    window.tidioChatApi.show();
+    window.tidioChatApi.open();
+  });
+}
+chatBtnFn()
+</script></div></body></html>
